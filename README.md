@@ -159,8 +159,6 @@ int main(){
 
 ### Ejercicio3
 
-No pasa por referencia el arbol al metodo insertar
-
 ~~~
 #include <iostream>
 #include <string>
@@ -168,47 +166,51 @@ using namespace std;
 
 struct nodoAB {
     int dato;
-    int cantidad;
+    int repetidos;
     nodoAB * der;
     nodoAB * izq;  
 };
 
+struct nodoLista {
+    int dato;
+    nodoLista * sig;
+};
+
 //ABB con repetidos
 class ABB {
-    private:
-        nodoAB * raiz;
     public:
+        nodoAB * raiz;
         ABB(){
             this -> raiz = NULL;
         };
-        nodoAB* obtenerRaiz(){
-            return this -> raiz;
-        }
-        void insertar(int dato, nodoAB * cursor){
+        void insertar(int dato, nodoAB * &cursor){
             if (cursor == NULL){
               cursor = new nodoAB;
               cursor -> dato = dato;
-              cursor -> cantidad = 1;
-              cursor -> der = NULL;
-              cursor -> izq = NULL;  
+              cursor -> repetidos = 0;
+              cursor -> der = cursor -> izq = NULL;  
             }else{
                 if (dato < cursor -> dato){
                     insertar (dato, cursor -> izq);
                 }else if (dato > cursor -> dato){
                     insertar (dato, cursor -> der);
                 }else{
-                    cursor -> cantidad ++;
+                    cursor -> repetidos ++;
                 }
             };
         };
-        void imprimirKmayores(int k, nodoAB * cursor){
-            if (cursor != NULL && k > 0){
-                imprimirKmayores(k, cursor -> der);
-                for (int i = 0; i < cursor -> cantidad; i++){
-                    cout << cursor -> dato << endl;
+        void a_Cadena(nodoLista * &cadena, nodoAB * cursor){
+            if (cursor != NULL){
+                a_Cadena(cadena, cursor -> izq);
+                //insercion al principio
+                for (int i = 0; i <= cursor -> repetidos; i++){
+                    nodoLista* nuevo = new nodoLista;
+                    nuevo -> dato = cursor -> dato;
+                    nuevo -> sig = cadena;
+                    cadena = nuevo;
                 }
-                imprimirKmayores(k--, cursor -> izq);
-            };
+                a_Cadena(cadena, cursor -> der);
+            }
         };
 };
 
@@ -220,11 +222,17 @@ int main(){
     cin >> cantElem;
     for (int i = 0; i < cantElem; i ++){
         int dato;
-        cin >> dato;
-        abb -> insertar(dato, abb -> obtenerRaiz());       
+        cin >> dato; 
+        abb -> insertar(dato, abb -> raiz);       
     };
-    abb -> imprimirKmayores(k, abb -> obtenerRaiz());
+    nodoLista * cadena = NULL;
+    abb -> a_Cadena(cadena, abb -> raiz);
+    int contador = 0;
+    while (contador < k){
+        cout << cadena->dato << endl;
+        cadena = cadena -> sig;
+        contador ++;
+    };
     return 1;
 }
 ~~~
-
