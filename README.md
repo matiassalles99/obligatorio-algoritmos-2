@@ -164,75 +164,70 @@ int main(){
 #include <string>
 using namespace std;
 
-struct nodoAB {
-    int dato;
-    int repetidos;
-    nodoAB * der;
-    nodoAB * izq;  
-};
-
-struct nodoLista {
-    int dato;
-    nodoLista * sig;
-};
-
-//ABB con repetidos
-class ABB {
+class maxHeap {
+    private:
+        int tope;
+        int capacidad;
+        int * vector;
     public:
-        nodoAB * raiz;
-        ABB(){
-            this -> raiz = NULL;
-        };
-        void insertar(int dato, nodoAB * &cursor){
-            if (cursor == NULL){
-              cursor = new nodoAB;
-              cursor -> dato = dato;
-              cursor -> repetidos = 0;
-              cursor -> der = cursor -> izq = NULL;  
-            }else{
-                if (dato < cursor -> dato){
-                    insertar (dato, cursor -> izq);
-                }else if (dato > cursor -> dato){
-                    insertar (dato, cursor -> der);
-                }else{
-                    cursor -> repetidos ++;
-                }
-            };
-        };
-        void a_Cadena(nodoLista * &cadena, nodoAB * cursor){
-            if (cursor != NULL){
-                a_Cadena(cadena, cursor -> izq);
-                //insercion al principio
-                for (int i = 0; i <= cursor -> repetidos; i++){
-                    nodoLista* nuevo = new nodoLista;
-                    nuevo -> dato = cursor -> dato;
-                    nuevo -> sig = cadena;
-                    cadena = nuevo;
-                }
-                a_Cadena(cadena, cursor -> der);
+        maxHeap(int capacidad_maxima){
+            this -> tope = 0;
+            this -> capacidad = capacidad_maxima;
+            this -> vector = new int[this -> capacidad + 1] {};
+        }
+        void flotar(int * vec, int pos){
+            if (pos > 1 && vec[pos/2] < vec[pos]){
+                int swap = vec[pos/2];
+                vec[pos/2] = vec[pos];
+                vec[pos] = swap;
+                flotar(vec, pos/2);
             }
-        };
+        }
+        void insertar(int dato){
+            this -> tope ++;
+            this -> vector[this -> tope] = dato;
+            this -> flotar(this -> vector, this -> tope);
+        }
+        void hundir(int * vec, int pos){
+            int swap = vec[pos];
+            while (2 * pos <= this -> tope){
+                int hijo = 2 * pos;
+                if (hijo + 1 <= this -> tope && vec[hijo] < vec[hijo + 1]){
+                    hijo ++;
+                }
+                if (swap < vec[hijo]){
+                    vec[pos] = vec[hijo];
+                    pos = hijo;
+                }else{
+                    break;
+                }
+            }
+            vec[pos] = swap;
+        }
+        //elimina y devuelve el maximo actual 
+        int extraerMax(){
+            int max = this -> vector[1];
+            this -> tope --;
+            this -> vector[1] = this -> vector[this -> tope];
+            hundir(this -> vector, 1);
+            return max;
+        }
 };
 
 int main(){
-    ABB * abb = new ABB();
     int k;
     cin >> k;
     int cantElem;
     cin >> cantElem;
+    maxHeap * heap = new maxHeap(cantElem);
     for (int i = 0; i < cantElem; i ++){
         int dato;
-        cin >> dato; 
-        abb -> insertar(dato, abb -> raiz);       
+        cin >> dato;
+        heap -> insertar(dato); 
     };
-    nodoLista * cadena = NULL;
-    abb -> a_Cadena(cadena, abb -> raiz);
-    int contador = 0;
-    while (contador < k){
-        cout << cadena->dato << endl;
-        cadena = cadena -> sig;
-        contador ++;
-    };
+    for (int i = 0; i < k; i++){
+        cout << heap -> extraerMax() << endl;
+    }
     return 1;
 }
 ~~~
