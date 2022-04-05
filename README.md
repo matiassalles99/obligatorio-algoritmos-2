@@ -18,15 +18,15 @@ class TablaHash{
         this -> array = new int[26] {}; 
     }
     void insertarEnHash(char puerta){
-        int pos = this -> fncHash(puerta);
+        int pos = this -> fncHash(puerta) % 26;
         this -> array[pos] ++;
     }
     void eliminarDeHash(char puerta){
-        int pos = this -> fncHash(puerta);
+        int pos = this -> fncHash(puerta) % 26;
         this -> array[pos] --;
     }
     bool existeEnHash(char puerta){
-        int pos = this -> fncHash(puerta);
+        int pos = this -> fncHash(puerta) % 26;
         return this -> array[pos] >= 1;
     }
 };
@@ -76,22 +76,27 @@ class TablaHash{
   private:
     nodoArray * array;
     int tope;
+    int capacidad;
     int fncHash(string nombre){
         int i;
-        for (i = 0 ; i < this->tope && nombre.compare(this -> array[i].nombreJugador) != 0; i++);
+        for (i = 0 ; i < this -> tope && nombre.compare(this -> array[i].nombreJugador) != 0; i++);
         if (i < this -> tope){
             return i;
         }else{
             return this -> tope;
         };
     }; 
+    int posHash(string nombre){
+        return fncHash(nombre) % this -> capacidad;
+    }
   public:
     TablaHash(int cantRondas){
-        this -> array = new nodoArray[cantRondas] {}; 
+        this -> capacidad = cantRondas;
+        this -> array = new nodoArray[this -> capacidad] {}; 
         this -> tope = 0;
     };
     void insertarEnHash(string nombre, int puntajeRonda, int nRonda){
-        int pos = this -> fncHash(nombre);
+        int pos = this -> posHash(nombre);
         if (pos == this -> tope){
             this -> tope ++;
         }
