@@ -11,7 +11,6 @@ class List
 public:
   List()
   {
-    cout << "Constructor lista" << endl;
     this->list = NULL;
     this->size = 0;
   }
@@ -20,7 +19,7 @@ public:
   {
     ListNode<T> *newNode = new ListNode<T>(value, NULL, NULL);
 
-    if (list == NULL)
+    if (this->list == NULL)
     {
       this->list = newNode;
       this->size++;
@@ -33,29 +32,32 @@ public:
 
     newNode->previous = aux;
     aux->next = newNode;
+    this->size++;
   }
 
   void remove(T value)
   {
-    cout << "remove!" << endl;
     assert(this->exists(value));
     ListNode<T> *aux = this->list;
-
-    if (this->list->value == value)
-    {
-      this->list = NULL;
-      delete aux;
-      this->size--;
-      return;
-    }
 
     while (aux->value != value && aux->next != NULL)
       aux = aux->next;
 
-    if (aux->next == NULL)
+    if (aux->next == NULL && aux->previous != NULL)
     {
       ListNode<T> *previous = aux->previous;
       previous->next = NULL;
+      delete aux;
+    }
+    else if (aux->next != NULL && aux->previous == NULL)
+    {
+      this->list = aux->next;
+      this->list->previous = NULL;
+      delete aux;
+    }
+    else if (aux->next == NULL && aux->previous == NULL)
+    {
+      this->list = NULL;
       delete aux;
     }
     else
@@ -66,6 +68,7 @@ public:
       next->previous = previous;
       delete aux;
     }
+
     this->size--;
   }
 
@@ -76,6 +79,8 @@ public:
 
     if (this->list == NULL)
       return false;
+    if (aux->value == value)
+      return true;
 
     while (aux->next != NULL && !exists)
     {

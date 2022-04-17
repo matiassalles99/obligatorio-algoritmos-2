@@ -11,8 +11,7 @@ class OpenHashTable
 public:
     OpenHashTable(int size, int (*hashFunction)(Key))
     {
-        cout << "Constructor" << endl;
-        this->array = new List<NodeStructure>[size];
+        this->array = new List<NodeStructure>[size]();
         this->size = size;
         this->hashFunction = hashFunction;
     }
@@ -20,33 +19,22 @@ public:
     void insert(Key key, Value value)
     {
         int position = this->hashFunction(key) % this->size;
-        List<NodeStructure> list = this->array[position];
-        list.insert(*(new NodeStructure(key, value)));
-
-        cout << "ACA INSERT SIZE" << list.size << "position " << position << endl;
-        cout << "Memory " << &list << endl;
-        list.print();
-        cout << endl;
+        List<NodeStructure> *list = &(this->array[position]);
+        list->insert(*(new NodeStructure(key, value)));
     }
 
     void remove(Key key)
     {
         int position = this->hashFunction(key) % this->size;
-        List<NodeStructure> list = this->array[position];
-        list.remove(*(new NodeStructure(key, NULL)));
+        List<NodeStructure> *list = &(this->array[position]);
+        list->remove(*(new NodeStructure(key, NULL)));
     }
 
     bool exists(Key key)
     {
         int position = this->hashFunction(key) % this->size;
-        List<NodeStructure> list = this->array[position];
-
-        cout << "ACA EXISTS"
-             << "position " << position << endl;
-        cout << "Size " << list.size << endl;
-        cout << "Memory " << &list << endl;
-        list.print();
-        return list.exists(*(new NodeStructure(key, NULL)));
+        List<NodeStructure> *list = &(this->array[position]);
+        return list->exists(*(new NodeStructure(key, NULL)));
     }
 
     void imprimir()
