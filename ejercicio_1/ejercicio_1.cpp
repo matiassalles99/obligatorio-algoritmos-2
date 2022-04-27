@@ -6,9 +6,9 @@
 #include "../utilities/hash_table/open_hash_table.cpp"
 using namespace std;
 
-int hashFunction(char puerta)
+int hashFunction(char door)
 {
-    return int(puerta) - 65;
+    return int(door) - 65;
 }
 
 int main()

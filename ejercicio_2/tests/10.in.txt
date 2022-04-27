@@ -1,0 +1,12 @@
+10
+Daniel 84
+Pedro 16
+Ricardo 87
+Pablo 22
+Clementa 91
+Fransisco 27
+Pedro 73
+Daniel 69
+Rocio 83
+Pablo 24
+
