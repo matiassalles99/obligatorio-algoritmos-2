@@ -92,6 +92,28 @@ public:
     return exists;
   }
 
+  T retrieveValue(T value)
+  {
+    assert(this->exists(value));
+    ListNode<T> *aux = this->list;
+
+    while (aux->value != value && aux->next != NULL)
+      aux = aux->next;
+
+    return aux->value;
+  }
+
+  void update(T value)
+  {
+    assert(this->exists(value));
+    ListNode<T> *aux = this->list;
+
+    while (aux->value != value && aux->next != NULL)
+      aux = aux->next;
+
+    aux->value = value;
+  }
+
   void print()
   {
     ListNode<T> *aux = this->list;

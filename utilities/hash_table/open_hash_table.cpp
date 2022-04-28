@@ -37,7 +37,24 @@ public:
         return list->exists(*(new NodeStructure(key, NULL)));
     }
 
-    void imprimir()
+    Value retrieveValue(Key key)
+    {
+        assert(this->exists(key));
+        int position = this->hashFunction(key) % this->size;
+        List<NodeStructure> *list = &(this->array[position]);
+        NodeStructure retrievedNode = list->retrieveValue(*(new NodeStructure(key, NULL)));
+        return retrievedNode.value;
+    }
+
+    void update(Key key, Value value)
+    {
+        assert(this->exists(key));
+        int position = this->hashFunction(key) % this->size;
+        List<NodeStructure> *list = &(this->array[position]);
+        list->update(*(new NodeStructure(key, value)));
+    }
+
+    void print()
     {
         for (int i = 0; i < this->size; i++)
         {
