@@ -13,7 +13,7 @@ private:
 public:
     MaxHeap(int capacity)
     {
-        this->top = 0;
+        this->top = 1;
         this->capacity = capacity;
         this->array = new int[this->capacity + 1];
     }
@@ -22,7 +22,7 @@ public:
     {
         this->top++;
         this->array[this->top] = value;
-        this->swim(this->array, this->top);
+        this->swim(this->top);
     }
 
     T pullMax()
@@ -30,39 +30,39 @@ public:
         int max = this->array[1];
         this->top--;
         this->array[1] = this->array[this->top];
-        sink(this->array, 1);
+        sink(1);
         return max;
     }
 
 private:
-    void swim(int *array, int position)
+    void swim(int position)
     {
-        if (position > 1 && array[position / 2] < array[position])
+        if (position > 1 && this->array[position / 2] < this->array[position])
         {
-            int swap = array[position / 2];
-            array[position / 2] = array[position];
-            array[position] = swap;
-            swim(array, position / 2);
+            int swap = this->array[position / 2];
+            this->array[position / 2] = this->array[position];
+            this->array[position] = swap;
+            swim(position / 2);
         }
     }
 
-    void sink(int *array, int position)
+    void sink(int position)
     {
-        int swap = array[position];
-        while (2 * position <= this->top)
+        int swap = this->array[position];
+        while (2 * position < this->top)
         {
             int son = 2 * position;
-            if (son + 1 <= this->top && array[son] < array[son + 1])
+            if (son + 1 < this->top && this->array[son] < this->array[son + 1])
                 son++;
 
-            if (swap < array[son])
+            if (swap < this->array[son])
             {
-                array[position] = array[son];
+                this->array[position] = this->array[son];
                 position = son;
             }
             else
                 break;
         }
-        array[position] = swap;
+        this->array[position] = swap;
     }
 };
