@@ -27,14 +27,14 @@ public:
     {
         int position = this->hashFunction(key) % this->size;
         List<NodeStructure> *list = &(this->array[position]);
-        list->remove(*(new NodeStructure(key, NULL)));
+        list->remove(*(new NodeStructure(key, Value())));
     }
 
     bool exists(Key key)
     {
         int position = this->hashFunction(key) % this->size;
         List<NodeStructure> *list = &(this->array[position]);
-        return list->exists(*(new NodeStructure(key, NULL)));
+        return list->exists(*(new NodeStructure(key, Value())));
     }
 
     Value retrieveValue(Key key)
@@ -42,7 +42,7 @@ public:
         assert(this->exists(key));
         int position = this->hashFunction(key) % this->size;
         List<NodeStructure> *list = &(this->array[position]);
-        NodeStructure retrievedNode = list->retrieveValue(*(new NodeStructure(key, NULL)));
+        NodeStructure retrievedNode = list->retrieveValue(*(new NodeStructure(key, Value())));
         return retrievedNode.value;
     }
 
