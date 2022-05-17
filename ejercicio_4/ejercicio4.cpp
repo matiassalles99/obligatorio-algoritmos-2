@@ -7,24 +7,25 @@ using namespace std;
 
 const char SEPARATOR = ' ';
 
-int * initVisited(int N)
+bool *initVisited(int N)
 {
-    int * visited = new int [N+1];
-    for (int n = 1; n <= N; n++) 
+    bool *visited = new bool[N + 1];
+    for (int n = 1; n <= N; n++)
     {
         visited[n] = false;
     }
     return visited;
 }
 
-void DFS(ListGraph * graph, int origin, int * &visited)
+void DFS(ListGraph *graph, int origin, bool *&visited)
 {
     visited[origin] = true;
     List<Edge> adjacencies = graph->adjacencies(origin);
-    
-    while (adjacencies.head != NULL){
+
+    while (adjacencies.head != NULL)
+    {
         int n_adj = adjacencies.head->value.destiny;
-        if(!visited[n_adj])
+        if (!visited[n_adj])
         {
             DFS(graph, n_adj, visited);
         }
@@ -32,22 +33,22 @@ void DFS(ListGraph * graph, int origin, int * &visited)
     }
 }
 
-int amountConnectedComponents(ListGraph * graph)
+int amountConnectedComponents(ListGraph *graph)
 {
     int N = graph->amountNodes();
-	int * visited = initVisited(N);
-	int amount = 0;
-	for (int n = 1; n <= N; n++)
+    bool *visited = initVisited(N);
+    int amount = 0;
+    for (int n = 1; n <= N; n++)
     {
         if (!visited[n])
         {
             DFS(graph, n, visited);
-		    amount ++;
+            amount++;
         }
     }
-	return amount;
+    return amount;
 }
-	
+
 int main()
 {
     string input;
@@ -58,9 +59,9 @@ int main()
     cin >> E;
     cin.ignore();
 
-    ListGraph * graph = new ListGraph(N, false, false);
+    ListGraph *graph = new ListGraph(N, false, false);
 
-    for (int e = 1; e <= E ; e++)
+    for (int e = 1; e <= E; e++)
     {
         getline(cin, input);
         int separatorIndex = input.find(SEPARATOR);
@@ -71,7 +72,7 @@ int main()
         graph->addEdge(origin, destiny, 1);
     }
 
-    cout << amountConnectedComponents(graph) << endl; 
+    cout << amountConnectedComponents(graph) << endl;
 
     return 1;
 }
