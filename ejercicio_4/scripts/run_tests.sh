@@ -9,7 +9,7 @@ echo "Exercise 4 compiled successfully"
 
 # Detect os for file compare tool
 file_compare_tool=""
-if [ "$(uname)" == *"MSYS_NT"* ] || [ "$(uname)" == *"MINGW"* ]
+if [[ "$(uname)" == *"MSYS_NT"* ] || [ "$(uname)" == *"MINGW"* ]]
 then
     # Windows
     file_compare_tool="fc /w"
