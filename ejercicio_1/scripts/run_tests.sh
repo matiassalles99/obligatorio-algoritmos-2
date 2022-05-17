@@ -7,18 +7,7 @@ echo "Compiling Exercise 1...."
 g++ -std=c++11 ejercicio_1/ejercicio1.cpp -o ejercicio_1/compiled/ejercicio1
 echo "Exercise 1 compiled successfully"
 
-# Detect os for file compare tool
-file_compare_tool=""
-if [ "$1" = "nomatch" ]
-then
-    # Windows
-    echo "Using fc"
-    file_compare_tool="fc /w"
-else
-    # Unix
-    echo "Using diff"
-    file_compare_tool="diff --ignore-space-change"
-fi
+file_compare_tool="diff --ignore-space-change"
 
 # Run all tests
 echo "Running Exercise 1 tests...."

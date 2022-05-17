@@ -72,7 +72,8 @@ int main()
         graph->addEdge(origin, destiny, 1);
     }
 
-    cout << amountConnectedComponents(graph) << endl;
+    int amountOfComponents = amountConnectedComponents(graph);
+    cout << amountOfComponents << endl;
 
     return 1;
 }

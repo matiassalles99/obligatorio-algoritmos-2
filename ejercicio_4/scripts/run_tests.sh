@@ -7,18 +7,7 @@ echo "Compiling Exercise 4...."
 g++ -std=c++11 ejercicio_4/ejercicio4.cpp -o ejercicio_4/compiled/ejercicio4
 echo "Exercise 4 compiled successfully"
 
-# Detect os for file compare tool
-file_compare_tool=""
-if [ "$1" = "nomatch" ]
-then
-    # Windows
-    echo "Using fc"
-    file_compare_tool="fc /w"
-else
-    # Unix
-    echo "Using diff"
-    file_compare_tool="diff --ignore-space-change"
-fi
+file_compare_tool="diff --ignore-space-change"
 
 # Run all tests
 echo "Running Exercise 4 tests...."
@@ -61,7 +50,6 @@ fi
 
 ejercicio_4/compiled/ejercicio4 < ejercicio_4/tests/100000.in.txt > ejercicio_4/outputs/100000.out.txt
 difference=$($file_compare_tool ejercicio_4/outputs/100000.out.txt ejercicio_4/tests/100000.out.txt)
-echo "$(cat ./ejercicio_4/outputs/100000.out.txt)"
 echo $difference
 
 if [ "$difference" != "" ]
