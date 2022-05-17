@@ -9,11 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.0.1
-          bundler-cache: true
-
       - name: Install tools for compiling c++ files
         run: sudo apt install build-essential
 
