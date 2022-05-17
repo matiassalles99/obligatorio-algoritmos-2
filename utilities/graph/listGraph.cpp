@@ -14,8 +14,8 @@ private:
     int E;
     int N;
 
-    bool isDirected;
     bool isCharged;
+    bool isDirected;
 
 public:    
     ListGraph(int N, bool isDirected, bool isCharged)

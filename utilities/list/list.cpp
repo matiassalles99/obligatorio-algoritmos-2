@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "list_node.cpp"
+
 using namespace std;
 
 template <typename T>
@@ -56,7 +57,7 @@ public:
 
   void remove(T value)
   {
-    assert(this->exists(value));
+    // assert(this->exists(value));
     ListNode<T> *aux = this->head;
 
     while (aux->value != value && aux->next != NULL)
@@ -98,7 +99,7 @@ public:
 
   T pullTailValue()
   {
-    assert(this->size > 0);
+    // assert(this->size > 0);
     ListNode<T> * tail = this->tail;
     T tailValue = tail->value;
     
@@ -140,7 +141,7 @@ public:
 
   T retrieveValue(T value)
   {
-    assert(this->exists(value));
+    // assert(this->exists(value));
     ListNode<T> *aux = this->head;
 
     while (aux->value != value && aux->next != NULL)
@@ -151,7 +152,7 @@ public:
 
   void update(T value)
   {
-    assert(this->exists(value));
+    // assert(this->exists(value));
     ListNode<T> *aux = this->head;
 
     while (aux->value != value && aux->next != NULL)

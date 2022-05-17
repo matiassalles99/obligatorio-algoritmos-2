@@ -7,9 +7,9 @@ using namespace std;
 
 const char SEPARATOR = ' ';
 
-int * initVisited(int N)
+bool * initVisited(int N)
 {
-    int * visited = new int [N+1];
+    bool * visited = new bool [N+1];
     for (int n = 1; n <= N; n++) 
     {
         visited[n] = false;
@@ -17,12 +17,13 @@ int * initVisited(int N)
     return visited;
 }
 
-void DFS(ListGraph * graph, int origin, int * &visited)
+void DFS(ListGraph * graph, int origin, bool * &visited)
 {
     visited[origin] = true;
     List<Edge> adjacencies = graph->adjacencies(origin);
     
-    while (adjacencies.head != NULL){
+    while (adjacencies.head != NULL)
+    {
         int n_adj = adjacencies.head->value.destiny;
         if(!visited[n_adj])
         {
@@ -35,16 +36,18 @@ void DFS(ListGraph * graph, int origin, int * &visited)
 int amountConnectedComponents(ListGraph * graph)
 {
     int N = graph->amountNodes();
-	int * visited = initVisited(N);
+	bool * visited = initVisited(N);
 	int amount = 0;
+
 	for (int n = 1; n <= N; n++)
     {
         if (!visited[n])
-        {
+        {   
             DFS(graph, n, visited);
 		    amount ++;
         }
     }
+
 	return amount;
 }
 	
@@ -58,7 +61,7 @@ int main()
     cin >> E;
     cin.ignore();
 
-    ListGraph * graph = new ListGraph(N, false, false);
+    ListGraph * graph = new ListGraph (N, false, false);
 
     for (int e = 1; e <= E ; e++)
     {

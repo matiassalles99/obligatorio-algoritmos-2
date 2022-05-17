@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "../utilities/hash_table/open_hash_table.cpp"
+
 using namespace std;
 
 const char SEPARATOR = ' ';

@@ -1,19 +1,18 @@
 #ifndef EJERCICIO_5
 #define EJERCICIO_5
 
-#include <cassert>
 #include <string>
 #include <iostream>
-#include <limits>
+
 #include "../utilities/graph/listGraph.cpp"
 
 using namespace std;
 
 const char SEPARATOR = ' ';
 
-int * initVisited(int N)
+bool * initVisited(int N)
 {
-    int * visited = new int [N+1];
+    bool * visited = new bool [N+1];
     for (int n = 1; n <= N; n++) 
     {
         visited[n] = false;
@@ -21,7 +20,7 @@ int * initVisited(int N)
     return visited;
 }
 
-void limit_DFS(ListGraph * graph, int origin, int n_limit, int * &visited)
+void limit_DFS(ListGraph * graph, int origin, int n_limit, bool * &visited)
 {
     if (origin == n_limit) 
         return;
@@ -29,7 +28,8 @@ void limit_DFS(ListGraph * graph, int origin, int n_limit, int * &visited)
     visited[origin] = true;
     List<Edge> adjacencies = graph->adjacencies(origin);
     
-    while (adjacencies.head != NULL){
+    while (adjacencies.head != NULL)
+    {
         int n_adj = adjacencies.head->value.destiny;
         if(!visited[n_adj])
         {
@@ -39,11 +39,11 @@ void limit_DFS(ListGraph * graph, int origin, int n_limit, int * &visited)
     }
 }
 
-bool existsFalse(int *visited, int limit_n, int N)
+bool existsFalse(bool *visited, int limit_n, int N)
 {
-    for(int n = 1; n <= N; n++)
+    for (int n = 1; n <= N; n++)
     {
-        if(!visited[n] && n != limit_n)
+        if (!visited[n] && n != limit_n)
         {
             return true;
         }
@@ -53,10 +53,10 @@ bool existsFalse(int *visited, int limit_n, int N)
 
 bool isJointPoint(ListGraph * graph, int n_limit, int N)
 {
-    int * visited = initVisited(N);
+    bool * visited = initVisited(N);
     List<Edge> adjacencies = graph->adjacencies(n_limit);
-    int n_adj = adjacencies.head->value.destiny;    
-    limit_DFS(graph, n_adj, n_limit, visited);
+    int n_adj = adjacencies.head->value.destiny;
+    limit_DFS (graph, n_adj, n_limit, visited);
     return existsFalse (visited, n_limit, N);
 }
 

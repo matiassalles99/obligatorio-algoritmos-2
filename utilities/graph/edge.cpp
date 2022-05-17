@@ -1,8 +1,6 @@
 #ifndef EDGE
 #define EDGE
 
-#include <assert.h>
-
 class Edge
 {
 public:
@@ -11,6 +9,7 @@ public:
   int charge;
 
   Edge(int origin, int destiny, int charge) : origin(origin) , destiny(destiny), charge(charge) {}
+  Edge() {}
 
   bool operator==(const Edge &other) const
   {
@@ -21,6 +20,16 @@ public:
   bool operator!=(const Edge &other) const
   {
     return !(*this == other);
+  }
+
+  bool operator<(const Edge &other) const
+  {
+    return charge < other.charge;
+  }
+
+  bool operator>(const Edge &other) const
+  {
+    return charge > other.charge;
   }
 
 };
