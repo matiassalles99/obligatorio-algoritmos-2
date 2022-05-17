@@ -9,7 +9,7 @@ echo "Exercise 1 compiled successfully"
 
 # Detect os for file compare tool
 file_compare_tool=""
-if [ "$1" = "windows" ]
+if [ "$1" = "nomatch" ]
 then
     # Windows
     echo "Using fc"
