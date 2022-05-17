@@ -13,3 +13,5 @@ if [ $? -ne 0 ]; then
     echo "Error running tests for exercise 4"
     exit 1
 fi
+
+echo "All tests passed :)"
