@@ -47,6 +47,4 @@ jobs:
         run: g++ --version
 
       - name: Run Tests
-        run: |
-          echo "$($OS_TYPE)"
-          echo "$(uname)"
+        run: ./run_tests.sh
