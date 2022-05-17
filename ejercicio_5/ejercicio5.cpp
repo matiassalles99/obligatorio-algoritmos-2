@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-#include "../utilities/graph/listGraph.cpp"
+#include "../utilities/graph/undirectedListGraph.cpp"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ bool * initVisited(int N)
     return visited;
 }
 
-void limit_DFS(ListGraph * graph, int origin, int n_limit, bool * &visited)
+void limit_DFS(UndirectedListGraph * graph, int origin, int n_limit, bool * &visited)
 {
     if (origin == n_limit) 
         return;
@@ -51,7 +51,7 @@ bool existsFalse(bool *visited, int limit_n, int N)
     return false;
 }
 
-bool isJointPoint(ListGraph * graph, int n_limit, int N)
+bool isJointPoint(UndirectedListGraph * graph, int n_limit, int N)
 {
     bool * visited = initVisited(N);
     List<Edge> adjacencies = graph->adjacencies(n_limit);
@@ -70,7 +70,7 @@ int main()
     cin >> E;
     cin.ignore();
 
-    ListGraph * graph = new ListGraph(N, false, false);
+    UndirectedListGraph * graph = new UndirectedListGraph(N, false);
 
     for (int e = 0; e < E ; e++)
     {

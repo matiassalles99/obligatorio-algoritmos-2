@@ -1,12 +1,12 @@
-#ifndef LIST_GRAPH
-#define LIST_GRAPH
+#ifndef UNDIRECTED_LIST_GRAPH
+#define UNDIRECTED_LIST_GRAPH
 
 #include "edge.cpp"
 #include "../list/list.cpp"
 
 using namespace std;
 
-class ListGraph
+class UndirectedListGraph
 {
 
 private: 
@@ -18,12 +18,11 @@ private:
     bool isDirected;
 
 public:    
-    ListGraph(int N, bool isDirected, bool isCharged)
+    UndirectedListGraph(int N, bool isCharged)
     {
         this->E = 0;
         this->N = N;
         
-        this->isDirected = isDirected;
         this->isCharged = isCharged;
 
         this->edgeList = new List<Edge>[N + 1];
@@ -49,13 +48,10 @@ public:
         List<Edge> * originList = &(this->edgeList[origin]);
         originList -> insertFirst(e1);
 
-        if (!isDirected)
-        {
-            Edge e2 (destiny, origin, chargeE);
-            List<Edge> * destinyList = &(this->edgeList[destiny]);
-            destinyList -> insertFirst(e2);
-        }
-
+        Edge e2 (destiny, origin, chargeE);
+        List<Edge> * destinyList = &(this->edgeList[destiny]);
+        destinyList -> insertFirst(e2);
+        
         this->E ++;
     }
 

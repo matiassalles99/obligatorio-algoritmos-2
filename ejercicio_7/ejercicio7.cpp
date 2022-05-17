@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 
-#include "../utilities/graph/listGraph.cpp"
+#include "../utilities/graph/undirectedListGraph.cpp"
 #include "../utilities/graph/mfset.cpp"
 #include "../utilities/heap/min_heap.cpp"
 
@@ -47,7 +47,7 @@ int main(){
     cin >> E;
     cin.ignore();
 
-    ListGraph * graph = new ListGraph(N, false, true);
+    UndirectedListGraph * graph = new UndirectedListGraph(N, true);
 
     for (int e = 0; e < E ; e++)
     {
