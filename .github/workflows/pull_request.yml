@@ -27,7 +27,7 @@ jobs:
 
       - uses: maxim-lobanov/setup-xcode@v1
         with:
-        xcode-version: '13.2.1'
+          xcode-version: '13.2.1'
 
       - name: Check compiler version
         run: g++ --version
