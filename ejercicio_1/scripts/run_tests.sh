@@ -9,12 +9,14 @@ echo "Exercise 1 compiled successfully"
 
 # Detect os for file compare tool
 file_compare_tool=""
-if [[ "$(uname)" == *"MSYS_NT"* ] || [ "$(uname)" == *"MINGW"* ]]
+if [ "$1" == "windows" ]
 then
     # Windows
+    echo "Using fc"
     file_compare_tool="fc /w"
 else
     # Unix
+    echo "Using diff"
     file_compare_tool="diff --ignore-space-change"
 fi
 
