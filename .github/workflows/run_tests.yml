@@ -16,7 +16,7 @@ jobs:
         run: g++ --version
 
       - name: Run Tests
-        run: ./run_tests.sh
+        run: bash run_tests.sh
   
   build_macos:
     runs-on: macos-latest
@@ -32,7 +32,7 @@ jobs:
         run: g++ --version
 
       - name: Run Tests
-        run: ./run_tests.sh
+        run: bash run_tests.sh
 
   build_windows:
     runs-on: windows-latest
