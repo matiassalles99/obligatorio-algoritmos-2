@@ -1,4 +1,4 @@
-name: Validate Pull Request
+name: Run tests
 
 on: [pull_request]
 
@@ -18,7 +18,6 @@ jobs:
       - name: Run Tests
         run: ./run_tests.sh
   
-
   build_macos:
     runs-on: macos-latest
 
@@ -34,3 +33,18 @@ jobs:
 
       - name: Run Tests
         run: ./run_tests.sh
+
+  build_windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
+
+      - name: Check compiler version
+        run: g++ --version
+
+      - name: Run Tests
+        run: echo $OS_TYPE
