@@ -61,6 +61,8 @@ fi
 
 ejercicio_4/compiled/ejercicio4 < ejercicio_4/tests/100000.in.txt > ejercicio_4/outputs/100000.out.txt
 difference=$($file_compare_tool ejercicio_4/outputs/100000.out.txt ejercicio_4/tests/100000.out.txt)
+type ejercicio_4/outputs/100000.out.txt
+cat  ejercicio_4/outputs/100000.out.txt
 echo $difference
 
 if [ "$difference" != "" ]
