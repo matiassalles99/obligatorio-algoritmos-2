@@ -8,7 +8,7 @@ g++ -std=c++11 ejercicio_4/ejercicio4.cpp -o ejercicio_4/compiled/ejercicio4
 echo "Exercise 4 compiled successfully"
 
 # Detect os for file compare tool
-file_compare_tool = ""
+file_compare_tool=""
 if [ "$(uname)" == *"MSYS_NT"* ] || [ "$(uname)" == *"MINGW"* ]
 then
     # Windows
@@ -58,7 +58,7 @@ then
 fi
 
 ejercicio_4/compiled/ejercicio4 < ejercicio_4/tests/100000.in.txt > ejercicio_4/outputs/100000.out.txt
-difference=$($file_compare_toole ejercicio_4/outputs/100000.out.txt ejercicio_4/tests/100000.out.txt)
+difference=$($file_compare_tool ejercicio_4/outputs/100000.out.txt ejercicio_4/tests/100000.out.txt)
 echo $difference
 
 if [ "$difference" != "" ]

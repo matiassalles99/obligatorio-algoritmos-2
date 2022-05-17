@@ -8,7 +8,7 @@ g++ -std=c++11 ejercicio_1/ejercicio1.cpp -o ejercicio_1/compiled/ejercicio1
 echo "Exercise 1 compiled successfully"
 
 # Detect os for file compare tool
-file_compare_tool = ""
+file_compare_tool=""
 if [ "$(uname)" == *"MSYS_NT"* ] || [ "$(uname)" == *"MINGW"* ]
 then
     # Windows
