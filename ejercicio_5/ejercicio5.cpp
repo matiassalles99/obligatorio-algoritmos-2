@@ -6,11 +6,13 @@
 #include <iostream>
 #include <limits>
 #include "../utilities/graph/listGraph.cpp"
+
 using namespace std;
 
 const char SEPARATOR = ' ';
 
-int * initVisited(int N) {
+int * initVisited(int N)
+{
     int * visited = new int [N+1];
     for (int n = 1; n <= N; n++) 
     {
@@ -19,7 +21,8 @@ int * initVisited(int N) {
     return visited;
 }
 
-void DFS(ListGraph * graph, int origin, int n_limit, int * &visited) {
+void limit_DFS(ListGraph * graph, int origin, int n_limit, int * &visited)
+{
     if (origin == n_limit) 
         return;
     
@@ -30,30 +33,31 @@ void DFS(ListGraph * graph, int origin, int n_limit, int * &visited) {
         int n_adj = adjacencies.head->value.destiny;
         if(!visited[n_adj])
         {
-            DFS(graph, n_adj, n_limit, visited);
+            limit_DFS(graph, n_adj, n_limit, visited);
         }
-
         adjacencies.head = adjacencies.head->next;
     }
 }
 
-bool areAllTrue(int *visited, int limit_n, int N) {
+bool existsFalse(int *visited, int limit_n, int N)
+{
     for(int n = 1; n <= N; n++)
     {
         if(!visited[n] && n != limit_n)
         {
-            return false;
+            return true;
         }
     }
-    return true;
+    return false;
 }
 
-bool isJointPoint(ListGraph * graph, int n_limit, int N) {
-    int * visited =  initVisited(N);
-    List<Edge> adjacencies = graph -> adjacencies(n_limit);
-    int n_adj = adjacencies.head->value.destiny; 
-    DFS(graph, n_adj, n_limit, visited);
-    return !areAllTrue(visited, n_limit, N);
+bool isJointPoint(ListGraph * graph, int n_limit, int N)
+{
+    int * visited = initVisited(N);
+    List<Edge> adjacencies = graph->adjacencies(n_limit);
+    int n_adj = adjacencies.head->value.destiny;    
+    limit_DFS(graph, n_adj, n_limit, visited);
+    return existsFalse (visited, n_limit, N);
 }
 
 int main()

@@ -44,7 +44,7 @@ public:
         int chargeE = this-> isCharged ? charge : 1;
         Edge e1 (origin, destiny, chargeE);
 
-        assert(!this->edgeList->exists(e1));
+        //assert(!this->edgeList->exists(e1));
         
         List<Edge> * originList = &(this->edgeList[origin]);
         originList -> insertFirst(e1);
@@ -61,8 +61,8 @@ public:
 
     List<Edge> adjacencies(int origin)
     {
-        List<Edge> originList = this->edgeList[origin];
-        return originList.clone();
+        return this->edgeList[origin];
+        //return this->edgeList[origin].clone();
     }
 
 };

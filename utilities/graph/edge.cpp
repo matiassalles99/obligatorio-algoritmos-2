@@ -14,7 +14,8 @@ public:
 
   bool operator==(const Edge &other) const
   {
-    return origin == other.origin && destiny == other.destiny;
+    return origin == other.origin && destiny == other.destiny 
+      && charge == other.charge;
   }
 
   bool operator!=(const Edge &other) const

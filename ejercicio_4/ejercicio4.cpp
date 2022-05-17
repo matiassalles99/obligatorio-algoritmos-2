@@ -2,41 +2,52 @@
 #define EJERCICIO_4
 
 #include "../utilities/graph/listGraph.cpp"
-#include "../utilities/graph/mfset.cpp"
-#include "../utilities/heap/max_heap.cpp"
+
 using namespace std;
 
 const char SEPARATOR = ' ';
 
-MFSet * kruskal(ListGraph * graph)
+int * initVisited(int N)
 {
-    int N = graph->amountNodes();
-    int E = graph->amountEdges();
-
-    MFSet * mfset = new MFSet(N); 
-	
-	for (int n = 1; n <= N ; n++)
+    int * visited = new int [N+1];
+    for (int n = 1; n <= N; n++) 
     {
-        List<Edge> adjacencies_n = graph->adjacencies(n);
-        List<Edge> unvisited_edges_n = adjacencies_n.clone();
-        int edges_origin_n = adjacencies_n.size-1;
-		
-        for (int e = 0; e < edges_origin_n; e++)
-        {
-            Edge limit_e = unvisited_edges_n.pullTailValue();
-
-            int origin_representative = mfset->find(limit_e.origin);
-            int destiny_representative = mfset->find(limit_e.destiny);
-            if (origin_representative != destiny_representative)
-            {
-                mfset->merge(origin_representative, destiny_representative);
-		    }
-        }
+        visited[n] = false;
     }
-
-    return mfset;
+    return visited;
 }
 
+void DFS(ListGraph * graph, int origin, int * &visited)
+{
+    visited[origin] = true;
+    List<Edge> adjacencies = graph->adjacencies(origin);
+    
+    while (adjacencies.head != NULL){
+        int n_adj = adjacencies.head->value.destiny;
+        if(!visited[n_adj])
+        {
+            DFS(graph, n_adj, visited);
+        }
+        adjacencies.head = adjacencies.head->next;
+    }
+}
+
+int amountConnectedComponents(ListGraph * graph)
+{
+    int N = graph->amountNodes();
+	int * visited = initVisited(N);
+	int amount = 0;
+	for (int n = 1; n <= N; n++)
+    {
+        if (!visited[n])
+        {
+            DFS(graph, n, visited);
+		    amount ++;
+        }
+    }
+	return amount;
+}
+	
 int main()
 {
     string input;
@@ -49,7 +60,7 @@ int main()
 
     ListGraph * graph = new ListGraph(N, false, false);
 
-    for (int e = 0; e < E ; e++)
+    for (int e = 1; e <= E ; e++)
     {
         getline(cin, input);
         int separatorIndex = input.find(SEPARATOR);
@@ -60,8 +71,7 @@ int main()
         graph->addEdge(origin, destiny, 1);
     }
 
-    MFSet * mfset = kruskal(graph);
-    cout << mfset -> amountConnectedComponents(N) << endl;
+    cout << amountConnectedComponents(graph) << endl; 
 
     return 1;
 }

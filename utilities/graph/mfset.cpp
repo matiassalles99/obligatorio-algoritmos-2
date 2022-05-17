@@ -12,7 +12,7 @@ public:
     MFSet(int N)
     {
         this->sets = new int[N + 1];
-        for (int n = 0; n <= N; n++)
+        for (int n = 1; n <= N; n++)
         {
             this->sets[n] = -1;
         }
@@ -41,7 +41,7 @@ public:
         int amount = 0;
         for(int n = 1; n <= N; n++)
         {
-            if(this->sets[n] == -1)
+            if (this->sets[n] == -1)
             {
                 amount ++;
             }
