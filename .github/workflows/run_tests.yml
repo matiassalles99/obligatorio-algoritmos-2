@@ -47,4 +47,4 @@ jobs:
         run: g++ --version
 
       - name: Run Tests
-        run: ./run_tests.sh
+        run: bash run_tests.sh
