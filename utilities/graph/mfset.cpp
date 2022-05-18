@@ -1,54 +1,67 @@
 #ifndef MF_SET
 #define MF_SET
 
+#include <iostream>
 using namespace std;
 
 class MFSet
 {
 private:
-    int * sets;
+    int *sets;
+    int size;
 
 public:
-    MFSet(int N)
+    MFSet(int numberOfElements)
     {
-        this->sets = new int[N + 1];
-        for (int n = 1; n <= N; n++)
+        this->sets = new int[numberOfElements + 1];
+        this->size = numberOfElements + 1;
+        for (int i = 0; i < this->size; i++)
         {
-            this->sets[n] = -1;
+            this->sets[i] = i;
         }
     }
 
     int find(int n)
     {
-        int n_parent = this->sets[n]; 
-        if (n_parent == -1)
+        if (this->sets[n] != n)
         {
-            return n;
+            return find(this->sets[n]);
         }
-        int n_representative = find(n_parent);
-        return n_representative;
+        return this->sets[n];
     }
 
-    void merge(int n1, int n2)
-    {   
-        int n1_representative = find(n1);
-        int n2_representative = find(n2);
-        this->sets[n2_representative] = n1_representative; 
+    void merge(int firstElement, int secondElement)
+    {
+        int firstElementSet = find(firstElement);
+        int secondElementSet = find(secondElement);
+
+        if (firstElementSet != secondElementSet)
+        {
+            this->sets[secondElementSet] = firstElementSet;
+        }
     }
 
-    int amountConnectedComponents(int N)
+    int amountConnectedComponents()
     {
         int amount = 0;
-        for(int n = 1; n <= N; n++)
+        for (int i = 1; i < this->size; i++)
         {
-            if (this->sets[n] == -1)
+            if (this->sets[i] == i)
             {
-                amount ++;
+                amount++;
             }
         }
         return amount;
     }
 
+    void print()
+    {
+        for (int n = 1; n < this->size; n++)
+        {
+            cout << this->sets[n] << " ";
+        }
+        cout << endl;
+    }
 };
 
 #endif

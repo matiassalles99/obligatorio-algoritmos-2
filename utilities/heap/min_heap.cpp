@@ -12,32 +12,32 @@ class MinHeap
 private:
     int top;
     int capacity;
-    T * array;
+    T *array;
 
 public:
     MinHeap(int capacity)
     {
         this->top = 1;
         this->capacity = capacity;
-        this->array = new T [this->capacity + 1];
+        this->array = new T[this->capacity + 1];
     }
 
-    bool isEmpty(){
+    bool isEmpty()
+    {
         return this->top == 1;
     }
 
     void insert(T value)
     {
-        this->top++;
-        this->array[this->top] = value;
-        this->swim(this->top);
+        this->array[this->top++] = value;
+        this->swim(this->top - 1);
     }
 
     T pullMin()
     {
         T min = this->array[1];
+        this->array[1] = this->array[this->top - 1];
         this->top--;
-        this->array[1] = this->array[this->top];
         sink(1);
         return min;
     }

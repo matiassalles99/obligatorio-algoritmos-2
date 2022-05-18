@@ -12,14 +12,14 @@ class MaxHeap
 private:
     int top;
     int capacity;
-    T * array;
+    T *array;
 
 public:
     MaxHeap(int capacity)
     {
         this->top = 1;
         this->capacity = capacity;
-        this->array = new T [this->capacity + 1];
+        this->array = new T[this->capacity + 1];
     }
 
     void insert(T value)
@@ -32,8 +32,8 @@ public:
     T pullMax()
     {
         T max = this->array[1];
-        this->top--;
         this->array[1] = this->array[this->top];
+        this->top--;
         sink(1);
         return max;
     }

@@ -75,7 +75,7 @@ int main()
     }
 
     int amountOfComponents = amountConnectedComponents(graph);
-    cout << amountOfComponents << endl;
+    cout << amountOfComponents;
 
     return 1;
 }

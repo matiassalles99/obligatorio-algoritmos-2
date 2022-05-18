@@ -19,17 +19,17 @@ int minimumTreeCoverCharge(int N, MinHeap<Edge> *heap)
 
     while (!heap->isEmpty())
     {
-        Edge min_e = heap->pullMin();
-        int origin_representative = mfset->find(min_e.origin);
-        int destiny_representative = mfset->find(min_e.destiny);
-        if (origin_representative != destiny_representative)
+        Edge minEdge = heap->pullMin();
+        int originRepresentative = mfset->find(minEdge.origin);
+        int destinyRepresentative = mfset->find(minEdge.destiny);
+        if (originRepresentative != destinyRepresentative)
         {
-            charge += min_e.charge;
-            mfset->merge(min_e.origin, min_e.destiny);
+            charge += minEdge.charge;
+            mfset->merge(minEdge.origin, minEdge.destiny);
         }
     }
 
-    if (mfset->amountConnectedComponents(N) > 1)
+    if (mfset->amountConnectedComponents() > 1)
     {
         return -1;
     }
@@ -55,30 +55,35 @@ int main()
         getline(cin, input);
         int fstSeparatorIndex = input.find(SEPARATOR);
 
-        string s_origin = input.substr(0, fstSeparatorIndex);
-        int origin = stoi(s_origin);
+        string originInput = input.substr(0, fstSeparatorIndex);
+        int origin = stoi(originInput);
 
-        string after_origin_input = input.substr(fstSeparatorIndex + 1);
-        int sndSeparatorIndex = after_origin_input.find(SEPARATOR);
+        string afterOriginInput = input.substr(fstSeparatorIndex + 1);
+        int sndSeparatorIndex = afterOriginInput.find(SEPARATOR);
 
-        string s_destiny = input.substr(fstSeparatorIndex + 1, sndSeparatorIndex);
-        int destiny = stoi(s_destiny);
+        string destinyInput = afterOriginInput.substr(0, sndSeparatorIndex);
+        int destiny = stoi(destinyInput);
 
-        string s_charge = input.substr(sndSeparatorIndex + 1);
-        int charge = stoi(s_charge);
+        string afterDestinyInput = afterOriginInput.substr(sndSeparatorIndex + 1);
+        int afterDestinySeparatorIndex = afterDestinyInput.find(SEPARATOR);
+
+        string chargeInput = afterDestinyInput.substr(0, afterDestinySeparatorIndex);
+        int charge = stoi(chargeInput);
 
         graph->addEdge(origin, destiny, charge);
     }
 
-    int max_amountOfElements = N * N;
-    MinHeap<Edge> *heap = new MinHeap<Edge>(max_amountOfElements);
+    int maxAmountOfElements = N * N;
+    MinHeap<Edge> *heap = new MinHeap<Edge>(maxAmountOfElements);
 
-    for (int n = 0; n < E; n++)
+    for (int n = 1; n <= N; n++)
     {
-        List<Edge> adjacencies_n = graph->adjacencies(n);
-        for (int e = 0; e < adjacencies_n.size; e++)
+        List<Edge> adjacencies = graph->adjacencies(n);
+        int adjacenciesAmount = adjacencies.size;
+        for (int e = 0; e < adjacenciesAmount; e++)
         {
-            heap->insert(adjacencies_n.pullTailValue());
+            Edge edge = (adjacencies.pullTailValue());
+            heap->insert(Edge(edge));
         }
     }
 

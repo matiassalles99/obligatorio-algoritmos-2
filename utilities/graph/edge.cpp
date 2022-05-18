@@ -13,6 +13,12 @@ public:
 
   Edge(int origin, int destiny, int charge) : origin(origin), destiny(destiny), charge(charge) {}
   Edge() {}
+  Edge(const Edge &edge)
+  {
+    this->origin = edge.origin;
+    this->destiny = edge.destiny;
+    this->charge = edge.charge;
+  }
 
   bool operator==(const Edge &other) const
   {
