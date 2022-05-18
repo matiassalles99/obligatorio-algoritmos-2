@@ -24,15 +24,14 @@ public:
 
     void insert(T value)
     {
-        this->top++;
-        this->array[this->top] = value;
-        this->swim(this->top);
+        this->array[this->top++] = value;
+        this->swim(this->top - 1);
     }
 
     T pullMax()
     {
         T max = this->array[1];
-        this->array[1] = this->array[this->top];
+        this->array[1] = this->array[this->top - 1];
         this->top--;
         sink(1);
         return max;
