@@ -3,54 +3,17 @@
 
 #include <string>
 #include <iostream>
+#include "../utilities/graph/matrix_graph.cpp"
 
 using namespace std;
 
 const char SEPARATOR = ' ';
 
-class MatrixGraph
+bool **warshall(MatrixGraph *graph)
 {
-
-private:
-    bool ** matrix;
-    int N;
-
-public:
-    MatrixGraph(int N)
-    {
-        this->N = N;
-
-        matrix = new bool * [N+1];
-        for (int v = 1; v <= N; v++){
-            matrix[v] = new bool [N+1];
-            for (int w = 1; w <= N; w++)
-            {
-                matrix[v][w] = false;
-            }
-        }
-    }
-
-    void addEdge(int origin, int destiny)
-    {
-        matrix[origin][destiny] = true;
-    }
-
-    bool ** getMatrix()
-    {
-        return this->matrix;
-    }
-
-    int amountNodes()
-    {
-        return this->N;
-    }
-};
-
-bool ** warshall(MatrixGraph * graph)
-{
-    bool ** matrix = graph -> getMatrix(); 
+    bool **matrix = graph->getMatrix();
     int N = graph->amountNodes();
-    
+
     for (int k = 1; k <= N; k++)
     {
         for (int v = 1; v <= N; v++)
@@ -80,9 +43,9 @@ int main()
     cin >> E;
     cin.ignore();
 
-    MatrixGraph * graph = new MatrixGraph(N);
+    MatrixGraph *graph = new MatrixGraph(N);
 
-    for (int e = 0; e < E ; e++)
+    for (int e = 0; e < E; e++)
     {
         getline(cin, input);
         int separatorIndex = input.find(SEPARATOR);
@@ -90,16 +53,17 @@ int main()
         int origin = stoi(input.substr(0, separatorIndex));
         int destiny = stoi(input.substr(separatorIndex + 1));
 
-        graph -> addEdge(origin, destiny);
+        graph->addEdge(origin, destiny);
     }
 
-    bool ** transitiveClosureMatrix = warshall(graph);
+    bool **transitiveClosureMatrix = warshall(graph);
 
-    for (int v = 1; v <= N; v ++)
+    for (int v = 1; v <= N; v++)
     {
         int w;
-        for (w = 1; w <= N && transitiveClosureMatrix[v][w]; w++);
-        if (w == N+1)
+        for (w = 1; w <= N && transitiveClosureMatrix[v][w]; w++)
+            ;
+        if (w == N + 1)
         {
             cout << v << endl;
         }

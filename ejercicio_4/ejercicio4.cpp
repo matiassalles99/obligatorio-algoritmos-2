@@ -1,27 +1,27 @@
 #ifndef EJERCICIO_4
 #define EJERCICIO_4
 
-#include "../utilities/graph/undirectedListGraph.cpp"
+#include "../utilities/graph/undirected_list_graph.cpp"
 
 using namespace std;
 
 const char SEPARATOR = ' ';
 
-bool * initVisited(int N)
+bool *initVisited(int N)
 {
-    bool * visited = new bool [N+1];
-    for (int n = 1; n <= N; n++) 
+    bool *visited = new bool[N + 1];
+    for (int n = 1; n <= N; n++)
     {
         visited[n] = false;
     }
     return visited;
 }
 
-void DFS(UndirectedListGraph * graph, int origin, bool * &visited)
+void DFS(UndirectedListGraph *graph, int origin, bool *&visited)
 {
     visited[origin] = true;
     List<Edge> adjacencies = graph->adjacencies(origin);
-    
+
     while (adjacencies.head != NULL)
     {
         int n_adj = adjacencies.head->value.destiny;
@@ -36,19 +36,19 @@ void DFS(UndirectedListGraph * graph, int origin, bool * &visited)
 int amountConnectedComponents(UndirectedListGraph *graph)
 {
     int N = graph->amountNodes();
-	bool * visited = initVisited(N);
-	int amount = 0;
+    bool *visited = initVisited(N);
+    int amount = 0;
 
-	for (int n = 1; n <= N; n++)
+    for (int n = 1; n <= N; n++)
     {
         if (!visited[n])
-        {   
+        {
             DFS(graph, n, visited);
             amount++;
         }
     }
 
-	return amount;
+    return amount;
 }
 
 int main()
@@ -61,7 +61,7 @@ int main()
     cin >> E;
     cin.ignore();
 
-    UndirectedListGraph * graph = new UndirectedListGraph (N, false);
+    UndirectedListGraph *graph = new UndirectedListGraph(N, false);
 
     for (int e = 1; e <= E; e++)
     {

@@ -9,20 +9,18 @@ using namespace std;
 class UndirectedListGraph
 {
 
-private: 
-    List<Edge> * edgeList;
+private:
+    List<Edge> *edgeList;
     int E;
     int N;
-
     bool isCharged;
-    bool isDirected;
 
-public:    
+public:
     UndirectedListGraph(int N, bool isCharged)
     {
         this->E = 0;
         this->N = N;
-        
+
         this->isCharged = isCharged;
 
         this->edgeList = new List<Edge>[N + 1];
@@ -40,27 +38,26 @@ public:
 
     void addEdge(int origin, int destiny, int charge)
     {
-        int chargeE = this-> isCharged ? charge : 1;
-        Edge e1 (origin, destiny, chargeE);
+        int edgeCharge = this->isCharged ? charge : 1;
+        Edge e1(origin, destiny, edgeCharge);
 
-        //assert(!this->edgeList->exists(e1));
-        
-        List<Edge> * originList = &(this->edgeList[origin]);
-        originList -> insertFirst(e1);
+        List<Edge> *originList = &(this->edgeList[origin]);
+        originList->insertFirst(e1);
 
-        Edge e2 (destiny, origin, chargeE);
-        List<Edge> * destinyList = &(this->edgeList[destiny]);
-        destinyList -> insertFirst(e2);
-        
-        this->E ++;
+        if (origin != destiny)
+        {
+            Edge e2(destiny, origin, edgeCharge);
+            List<Edge> *destinyList = &(this->edgeList[destiny]);
+            destinyList->insertFirst(e2);
+        }
+
+        this->E++;
     }
 
     List<Edge> adjacencies(int origin)
     {
         return this->edgeList[origin];
-        //return this->edgeList[origin].clone();
     }
-
 };
 
 #endif

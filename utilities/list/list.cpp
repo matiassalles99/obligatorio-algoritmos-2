@@ -65,7 +65,7 @@ public:
 
     if (this->tail == aux)
     {
-      this->tail = aux->previous; 
+      this->tail = aux->previous;
     }
 
     if (aux->next == NULL && aux->previous != NULL)
@@ -100,9 +100,9 @@ public:
   T pullTailValue()
   {
     // assert(this->size > 0);
-    ListNode<T> * tail = this->tail;
+    ListNode<T> *tail = this->tail;
     T tailValue = tail->value;
-    
+
     this->tail = this->tail->previous;
     if (this->tail == NULL)
     {
@@ -114,8 +114,8 @@ public:
     }
 
     delete tail;
-    this->size --;
-    
+    this->size--;
+
     return tailValue;
   }
 
@@ -168,9 +168,9 @@ public:
     ListNode<T> *aux = this->head;
     while (aux != NULL)
     {
-      T value = aux -> value;
+      T value = aux->value;
       clone.insertLast(value);
-      aux = aux -> next;
+      aux = aux->next;
     }
 
     return clone;
@@ -179,6 +179,8 @@ public:
   void print()
   {
     ListNode<T> *aux = this->head;
+    std::cout << "Size: " << this->size << std::endl;
+
     while (aux != NULL)
     {
       std::cout << " " << aux->value << " ->";
