@@ -6,6 +6,17 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+./ejercicio_2/scripts/run_tests.sh
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 2"
+    exit 1
+fi
+
+./ejercicio_3/scripts/run_tests.sh
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 3"
+    exit 1
+fi
 
 ./ejercicio_4/scripts/run_tests.sh
 
