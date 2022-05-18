@@ -3,13 +3,13 @@
 
 #include <string>
 #include <iostream>
-#include "../utilities/graph/matrix_graph.cpp"
+#include "../utilities/graph/undirected_unweighted_matrix_graph.cpp"
 
 using namespace std;
 
 const char SEPARATOR = ' ';
 
-bool **warshall(MatrixGraph *graph)
+bool **warshall(UndirectedUnweightedMatrixGraph *graph)
 {
     bool **matrix = graph->getMatrix();
     int N = graph->amountNodes();
@@ -43,7 +43,7 @@ int main()
     cin >> E;
     cin.ignore();
 
-    MatrixGraph *graph = new MatrixGraph(N);
+    UndirectedUnweightedMatrixGraph *graph = new UndirectedUnweightedMatrixGraph(N);
 
     for (int e = 0; e < E; e++)
     {

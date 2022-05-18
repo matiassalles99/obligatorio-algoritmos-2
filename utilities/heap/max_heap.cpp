@@ -24,8 +24,9 @@ public:
 
     void insert(T value)
     {
-        this->array[this->top++] = value;
-        this->swim(this->top - 1);
+        this->array[this->top] = value;
+        this->swim(this->top);
+        this->top ++;
     }
 
     T pullMax()

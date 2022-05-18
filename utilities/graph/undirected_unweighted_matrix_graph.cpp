@@ -1,17 +1,19 @@
 #ifndef MATRIX_GRAPH
 #define MATRIX_GRAPH
 
-class MatrixGraph
+class UndirectedUnweightedMatrixGraph
 {
 
 private:
   bool **matrix;
   int N;
+  int E;
 
 public:
-  MatrixGraph(int N)
+  UndirectedUnweightedMatrixGraph(int N)
   {
     this->N = N;
+    this->E = 0;
 
     matrix = new bool *[N + 1];
     for (int v = 1; v <= N; v++)
@@ -27,6 +29,7 @@ public:
   void addEdge(int origin, int destiny)
   {
     matrix[origin][destiny] = true;
+    this->E ++;
   }
 
   bool **getMatrix()
@@ -37,6 +40,11 @@ public:
   int amountNodes()
   {
     return this->N;
+  }
+
+  int amountEdges()
+  {
+    return this->E;
   }
 };
 

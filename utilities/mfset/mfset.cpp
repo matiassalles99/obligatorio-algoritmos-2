@@ -17,17 +17,18 @@ public:
         this->size = numberOfElements + 1;
         for (int i = 0; i < this->size; i++)
         {
-            this->sets[i] = i;
+            this->sets[i] = -1;
         }
     }
 
     int find(int n)
     {
-        if (this->sets[n] != n)
+        int father = this->sets[n];
+        if (father != -1)
         {
-            return find(this->sets[n]);
+            return find(father);
         }
-        return this->sets[n];
+        return father;
     }
 
     void merge(int firstElement, int secondElement)
@@ -46,7 +47,7 @@ public:
         int amount = 0;
         for (int i = 1; i < this->size; i++)
         {
-            if (this->sets[i] == i)
+            if (this->sets[i] == -1)
             {
                 amount++;
             }
