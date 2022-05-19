@@ -17,17 +17,17 @@ public:
         this->size = numberOfElements + 1;
         for (int i = 0; i < this->size; i++)
         {
-            this->sets[i] = -1;
+            this->sets[i] = i;
         }
     }
 
     int find(int n)
     {
         int father = this->sets[n];
-        if (father != -1)
+        if (father != n)
         {
             return find(father);
-        }
+        }   
         return father;
     }
 
@@ -47,7 +47,7 @@ public:
         int amount = 0;
         for (int i = 1; i < this->size; i++)
         {
-            if (this->sets[i] == -1)
+            if (this->sets[i] == i)
             {
                 amount++;
             }
