@@ -1,5 +1,3 @@
-#pragma comment(linker, "/STACK:128000000")
-
 #ifndef EJERCICIO_4
 #define EJERCICIO_4
 
