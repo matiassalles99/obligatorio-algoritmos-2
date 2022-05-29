@@ -23,11 +23,12 @@ public:
 
     int find(int n)
     {
-        if (this->sets[n] != n)
+        int father = this->sets[n];
+        if (father != n)
         {
-            return find(this->sets[n]);
-        }
-        return this->sets[n];
+            return find(father);
+        }   
+        return father;
     }
 
     void merge(int firstElement, int secondElement)

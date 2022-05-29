@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "../utilities/graph/undirected_list_graph.cpp"
-#include "../utilities/graph/mfset.cpp"
+#include "../utilities/mfset/mfset.cpp"
 #include "../utilities/heap/min_heap.cpp"
 
 using namespace std;
