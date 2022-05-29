@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include "../utilities/heap/max_heap.cpp"
+
 using namespace std;
 
 int main()
@@ -28,6 +29,7 @@ int main()
   {
     cout << heap->pullMax() << endl;
   }
+  
   return 1;
 };
 

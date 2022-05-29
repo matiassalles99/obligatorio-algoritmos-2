@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "../list/list.cpp"
+
 using namespace std;
 
 template <typename Key, typename Value>
@@ -20,7 +21,7 @@ public:
     {
         int position = this->hashFunction(key) % this->size;
         List<NodeStructure> *list = &(this->array[position]);
-        list->insert(*(new NodeStructure(key, value)));
+        list->insertLast(*(new NodeStructure(key, value)));
     }
 
     void remove(Key key)
@@ -39,7 +40,7 @@ public:
 
     Value retrieveValue(Key key)
     {
-        assert(this->exists(key));
+        //assert(this->exists(key));
         int position = this->hashFunction(key) % this->size;
         List<NodeStructure> *list = &(this->array[position]);
         NodeStructure retrievedNode = list->retrieveValue(*(new NodeStructure(key, Value())));
@@ -48,7 +49,7 @@ public:
 
     void update(Key key, Value value)
     {
-        assert(this->exists(key));
+        //assert(this->exists(key));
         int position = this->hashFunction(key) % this->size;
         List<NodeStructure> *list = &(this->array[position]);
         list->update(*(new NodeStructure(key, value)));

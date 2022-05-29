@@ -2,7 +2,6 @@
 #define LIST_NODE
 
 #include <iostream>
-#include <assert.h>
 
 template <typename T>
 class ListNode

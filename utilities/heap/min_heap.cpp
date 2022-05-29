@@ -1,5 +1,5 @@
-#ifndef MAX_HEAP
-#define MAX_HEAP
+#ifndef MIN_HEAP
+#define MIN_HEAP
 
 #include <iostream>
 #include <string>
@@ -7,7 +7,7 @@
 using namespace std;
 
 template <typename T>
-class MaxHeap
+class MinHeap
 {
 private:
     int top;
@@ -15,11 +15,16 @@ private:
     T *array;
 
 public:
-    MaxHeap(int capacity)
+    MinHeap(int capacity)
     {
         this->top = 1;
         this->capacity = capacity;
         this->array = new T[this->capacity + 1];
+    }
+
+    bool isEmpty()
+    {
+        return this->top == 1;
     }
 
     void insert(T value)
@@ -28,19 +33,19 @@ public:
         this->swim(this->top - 1);
     }
 
-    T pullMax()
+    T pullMin()
     {
-        T max = this->array[1];
+        T min = this->array[1];
         this->array[1] = this->array[this->top - 1];
         this->top--;
         sink(1);
-        return max;
+        return min;
     }
 
 private:
     void swim(int position)
     {
-        if (position > 1 && this->array[position / 2] < this->array[position])
+        if (position > 1 && this->array[position / 2] > this->array[position])
         {
             T swap = this->array[position / 2];
             this->array[position / 2] = this->array[position];
@@ -55,10 +60,10 @@ private:
         while (2 * position < this->top)
         {
             int son = 2 * position;
-            if (son + 1 < this->top && this->array[son] < this->array[son + 1])
+            if (son + 1 < this->top && this->array[son] > this->array[son + 1])
                 son++;
 
-            if (swap < this->array[son])
+            if (swap > this->array[son])
             {
                 this->array[position] = this->array[son];
                 position = son;
