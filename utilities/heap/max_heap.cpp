@@ -26,7 +26,7 @@ public:
     {
         this->array[this->top] = value;
         this->swim(this->top);
-        this->top ++;
+        this->top++;
     }
 
     T pullMax()
@@ -36,6 +36,11 @@ public:
         this->top--;
         sink(1);
         return max;
+    }
+
+    T max()
+    {
+        return this->array[1];
     }
 
 private:
