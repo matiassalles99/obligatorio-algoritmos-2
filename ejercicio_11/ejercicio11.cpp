@@ -77,7 +77,7 @@ void mazeBacktracking(int Xi, int Yi, int Xf, int Yf, int &optimalSum, int curre
 void maze(int Xi, int Yi, int Xf, int Yf)
 {
   int currentSum = matrix[Xi][Yi];
-  int optimalSum = INT_MAX;
+  int optimalSum = INT32_MAX;
   bool **visited = new bool *[M];
   initializedVisited(visited);
   visited[Xi][Yi] = true;
