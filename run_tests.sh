@@ -46,4 +46,32 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
+./ejercicio_8/scripts/run_tests.sh
+
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 8"
+    exit 1
+fi
+
+./ejercicio_9/scripts/run_tests.sh
+
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 9"
+    exit 1
+fi
+
+./ejercicio_10/scripts/run_tests.sh
+
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 10"
+    exit 1
+fi
+
+./ejercicio_11/scripts/run_tests.sh
+
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 11"
+    exit 1
+fi
+
 echo "All tests passed :)"

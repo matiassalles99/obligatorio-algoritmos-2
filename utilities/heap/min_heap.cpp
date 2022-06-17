@@ -31,7 +31,7 @@ public:
     {
         this->array[this->top] = value;
         this->swim(this->top);
-        this->top ++;
+        this->top++;
     }
 
     T pullMin()
@@ -41,6 +41,11 @@ public:
         this->top--;
         sink(1);
         return min;
+    }
+
+    T min()
+    {
+        return this->array[1];
     }
 
 private:
