@@ -46,11 +46,6 @@ public:
 
 const char SEPARATOR = ' ';
 
-bool timeOverlaps(Flight f1, Flight f2)
-{
-    return f2.arrival <= f1.departure;
-}
-
 int main()
 {
     string input;
@@ -76,26 +71,24 @@ int main()
     }
 
     int totalPlatforms = 1;
-    MinHeap<int> *heap2 = new MinHeap<int>(numberOfFlights);
-    heap2->insert(heap->pullMin().departure);
+    MinHeap<int> *departuresHeap = new MinHeap<int>(numberOfFlights);
+    departuresHeap->insert(heap->pullMin().departure);
 
     while (!heap->isEmpty())
     {
         Flight currentFlight = heap->pullMin();
-        if (heap2->min() >= currentFlight.arrival)
+        if (departuresHeap->min() > currentFlight.arrival)
         {
             totalPlatforms++;
         }
         else
         {
-            heap2->pullMin();
+            departuresHeap->pullMin();
         }
-        heap2->insert(currentFlight.departure);
+        departuresHeap->insert(currentFlight.departure);
     }
 
     cout << totalPlatforms;
-
-    return 1;
 }
 
 #endif

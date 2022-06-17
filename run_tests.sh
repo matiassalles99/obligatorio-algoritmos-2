@@ -46,7 +46,12 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Falta el 8 porque esta fallando
+./ejercicio_8/scripts/run_tests.sh
+
+if [ $? -ne 0 ]; then
+    echo "Error running tests for exercise 8"
+    exit 1
+fi
 
 ./ejercicio_9/scripts/run_tests.sh
 
