@@ -2,7 +2,7 @@
 Repositorio para el obligatorio de algoritmos 2 M4A (Marzo 2022)
 
 ## Alumnos
-- Nicolás DeLucca (202746)
+- Nicolás De Lucca (202746)
 - Gabriel Ripoll (201700)
 - Matías Salles (201701)
 
