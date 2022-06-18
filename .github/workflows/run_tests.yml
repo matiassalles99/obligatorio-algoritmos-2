@@ -16,4 +16,5 @@ jobs:
         run: g++ --version
 
       - name: Run Tests
-        run: ./src/run_tests.sh
+        working-directory: ./src
+        run: ./run_tests.sh
