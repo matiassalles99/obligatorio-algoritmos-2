@@ -1,0 +1,20 @@
+name: Run tests
+
+on: [pull_request]
+
+jobs:
+  build_linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install tools for compiling c++ files
+        run: sudo apt install build-essential
+
+      - name: Check compiler version
+        run: g++ --version
+
+      - name: Run Tests
+        working-directory: ./src
+        run: ./run_tests.sh

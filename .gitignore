@@ -1,0 +1,9 @@
+*.DS_Store
+
+.vscode/*
+
+!.vscode/settings.json
+
+*/outputs/*.out.txt
+*/compiled/*
+!*/compiled/.keep
